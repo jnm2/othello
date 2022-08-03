@@ -14,7 +14,7 @@ public sealed class OthelloGame
         var newState = State.Move(x, y, State.CurrentPlayer);
         if (newState == null) return false;
 
-        if (stateIndex + 1 < history.Count) history.RemoveRange(stateIndex + 1, history.Count - (stateIndex + 1));
+        history.RemoveRange(stateIndex + 1, history.Count - (stateIndex + 1));
         history.Add(newState);
         stateIndex++;
 
