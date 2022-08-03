@@ -191,13 +191,29 @@ public sealed class OthelloBoard : GraphicsControl
     protected override void OnKeyDown(KeyEventArgs e)
     {
         if (e.Control)
-            if (e.KeyCode == Keys.Z)
-                { othello.Undo(); Invalidate(); }
-            else if (e.KeyCode == Keys.Y)
-                { othello.Redo(); Invalidate(); }
-            else if (e.KeyCode == Keys.H)
-                { ShowHint = !ShowHint; Invalidate(); }
-            else if (e.KeyCode == Keys.R)
-            { ShowConsequence = !ShowConsequence; Invalidate(); }
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Z:
+                    othello.Undo();
+                    Invalidate();
+                    break;
+
+                case Keys.Y:
+                    othello.Redo();
+                    Invalidate();
+                    break;
+
+                case Keys.H:
+                    ShowHint = !ShowHint;
+                    Invalidate();
+                    break;
+
+                case Keys.R:
+                    ShowConsequence = !ShowConsequence;
+                    Invalidate();
+                    break;
+            }
+        }
     }
 }
