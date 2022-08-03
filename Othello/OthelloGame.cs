@@ -15,9 +15,9 @@ public sealed class OthelloGame
         history.Add(state);
     }
 
-    public OthelloState State { get { return history[stateIndex]; } }
+    public OthelloState State => history[stateIndex];
 
-    public Player CurrentPlayer { get { return State.CurrentPlayer; } }
+    public Player CurrentPlayer => State.CurrentPlayer;
 
     public bool Move(int x, int y)
     {

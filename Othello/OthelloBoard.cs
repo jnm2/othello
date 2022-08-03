@@ -13,17 +13,7 @@ public sealed class OthelloBoard : GraphicsControl
     }
 
     [DefaultValue(typeof(Color), "16, 64, 32")]
-    public override Color BackColor
-    {
-        get
-        {
-            return base.BackColor;
-        }
-        set
-        {
-            base.BackColor = value;
-        }
-    }
+    public override Color BackColor { get => base.BackColor; set => base.BackColor = value; }
 
     [DefaultValue(typeof(Color), "24, 96, 48"), Category("Appearance")]
     public Color BoardColor { get; set; }
@@ -31,7 +21,7 @@ public sealed class OthelloBoard : GraphicsControl
     private OthelloGame othello;
     public OthelloGame Othello
     {
-        get { return othello; }
+        get => othello;
         set
         {
             othello = value;
