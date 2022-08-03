@@ -31,9 +31,9 @@ public sealed class OthelloBoard : GraphicsControl
 
     private Point mouseSquare;
 
-    private static double NearestDistanceWhere(int xLen, int yLen, PointF nearTo, Func<int, int, bool> pred)
+    private static float NearestDistanceWhere(int xLen, int yLen, PointF nearTo, Func<int, int, bool> pred)
     {
-        var r = double.MaxValue;
+        var r = float.MaxValue;
         for (var x = 0; x < xLen; x++)
             for (var y = 0; y < yLen; y++)
                 if (pred(x, y))
@@ -41,7 +41,7 @@ public sealed class OthelloBoard : GraphicsControl
                     var dist = Sqr(nearTo.X - x) + Sqr(nearTo.Y - y);
                     if (r > dist) r = dist;
                 }
-        return Math.Sqrt(r);
+        return MathF.Sqrt(r);
     }
 
     public byte MinHint { get; set; }
@@ -169,11 +169,6 @@ public sealed class OthelloBoard : GraphicsControl
     }
 
     private static float Sqr(float x)
-    {
-        return x * x;
-    }
-
-    private static double Sqr(double x)
     {
         return x * x;
     }
