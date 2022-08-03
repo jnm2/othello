@@ -1,11 +1,3 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Drawing;
-
 namespace Othello
 {
     abstract class GraphicsControl : Control
@@ -38,7 +30,7 @@ namespace Othello
 
         protected override void OnMouseDown(MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left) isLeftMouseDown = true;
+            if (e.Button == MouseButtons.Left) isLeftMouseDown = true;
             var viewLocation = ClientToView(e.Location);
             ViewMouseDown(viewLocation.X, viewLocation.Y, e.Button);
  	        base.OnMouseDown(e);
@@ -51,7 +43,7 @@ namespace Othello
         }
         protected override void OnMouseUp(MouseEventArgs e)
         {
-            if (e.Button == System.Windows.Forms.MouseButtons.Left) isLeftMouseDown = false;
+            if (e.Button == MouseButtons.Left) isLeftMouseDown = false;
             var viewLocation = ClientToView(e.Location);
             ViewMouseUp(viewLocation.X, viewLocation.Y, e.Button);
             base.OnMouseUp(e);
