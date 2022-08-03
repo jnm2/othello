@@ -3,17 +3,7 @@ namespace Othello;
 public sealed class OthelloGame
 {
     private int stateIndex;
-    private readonly List<OthelloState> history = new();
-
-    public OthelloGame()
-    {
-        history.Add(OthelloState.NewGame());
-    }
-
-    public OthelloGame(OthelloState state)
-    {
-        history.Add(state);
-    }
+    private readonly List<OthelloState> history = new() { OthelloState.NewGame() };
 
     public OthelloState State => history[stateIndex];
 
