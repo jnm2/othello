@@ -2,8 +2,8 @@ namespace Othello;
 
 public sealed class OthelloGame
 {
-    private int stateIndex = 0;
-    private readonly List<OthelloState> history = new List<OthelloState>();
+    private int stateIndex;
+    private readonly List<OthelloState> history = new();
 
     public OthelloGame()
     {
