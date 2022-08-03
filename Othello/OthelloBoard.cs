@@ -188,29 +188,31 @@ public sealed class OthelloBoard : GraphicsControl
         Invalidate();
     }
 
-    protected override void OnKeyDown(KeyEventArgs e)
+    protected override bool ProcessDialogKey(Keys keyData)
     {
-        switch (e.KeyData)
+        switch (keyData)
         {
             case Keys.Control | Keys.Z:
                 othello.Undo();
                 Invalidate();
-                break;
+                return true;
 
             case Keys.Control | Keys.Y:
                 othello.Redo();
                 Invalidate();
-                break;
+                return true;
 
             case Keys.Control | Keys.H:
                 ShowHint = !ShowHint;
                 Invalidate();
-                break;
+                return true;
 
             case Keys.Control | Keys.R:
                 ShowConsequence = !ShowConsequence;
                 Invalidate();
-                break;
+                return true;
         }
+
+        return false;
     }
 }
