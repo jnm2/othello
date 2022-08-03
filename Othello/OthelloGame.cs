@@ -14,7 +14,7 @@ public sealed class OthelloGame
         var newState = State.Move(x, y, State.CurrentPlayer);
         if (newState == null) return false;
 
-        if (stateIndex < history.Count - 1) history.RemoveRange(stateIndex + 1, history.Count - 1 - stateIndex);
+        if (stateIndex + 1 < history.Count) history.RemoveRange(stateIndex + 1, history.Count - (stateIndex + 1));
         history.Add(newState);
         stateIndex++;
 
@@ -30,7 +30,7 @@ public sealed class OthelloGame
 
     public bool Redo()
     {
-        if (stateIndex == history.Count - 1) return false;
+        if (stateIndex + 1 == history.Count) return false;
         stateIndex++;
         return true;
     }
