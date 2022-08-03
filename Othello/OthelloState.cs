@@ -18,61 +18,61 @@ public sealed class OthelloState
 
     public bool IsLegalMove(int x, int y, Player player)
     {
-        if (Board[x, y].HasValue) return false;
+        if (Board[x, y] is not null) return false;
 
-        if (y >= 2 && Board[x, y - 1].HasValue && Board[x, y - 1] != player)
+        if (y >= 2 && Board[x, y - 1] is not null && Board[x, y - 1] != player)
             for (var i = 2; y - i >= 0; i++)
             {
-                if (!Board[x, y - i].HasValue) break;
+                if (Board[x, y - i] is null) break;
                 if (Board[x, y - i] == player) return true;
             }
 
-        if (y < Board.GetLength(1) - 2 && Board[x, y + 1].HasValue && Board[x, y + 1] != player)
+        if (y < Board.GetLength(1) - 2 && Board[x, y + 1] is not null && Board[x, y + 1] != player)
             for (var i = 2; y + i < Board.GetLength(1); i++)
             {
-                if (!Board[x, y + i].HasValue) break;
+                if (Board[x, y + i] is null) break;
                 if (Board[x, y + i] == player) return true;
             }
 
-        if (x >= 2 && Board[x - 1, y].HasValue && Board[x - 1, y] != player)
+        if (x >= 2 && Board[x - 1, y] is not null && Board[x - 1, y] != player)
             for (var i = 2; x - i >= 0; i++)
             {
-                if (!Board[x - i, y].HasValue) break;
+                if (Board[x - i, y] is null) break;
                 if (Board[x - i, y] == player) return true;
             }
 
-        if (x < Board.GetLength(0) - 2 && Board[x + 1, y].HasValue && Board[x + 1, y] != player)
+        if (x < Board.GetLength(0) - 2 && Board[x + 1, y] is not null && Board[x + 1, y] != player)
             for (var i = 2; x + i < Board.GetLength(0); i++)
             {
-                if (!Board[x + i, y].HasValue) break;
+                if (Board[x + i, y] is null) break;
                 if (Board[x + i, y] == player) return true;
             }
 
-        if (x >= 2 && y >= 2 && Board[x - 1, y - 1].HasValue && Board[x - 1, y - 1] != player)
+        if (x >= 2 && y >= 2 && Board[x - 1, y - 1] is not null && Board[x - 1, y - 1] != player)
             for (var i = 2; x - i >= 0 && y - i >= 0; i++)
             {
-                if (!Board[x - i, y - i].HasValue) break;
+                if (Board[x - i, y - i] is null) break;
                 if (Board[x - i, y - i] == player) return true;
             }
 
-        if (x < Board.GetLength(0) - 2 && y >= 2 && Board[x + 1, y - 1].HasValue && Board[x + 1, y - 1] != player)
+        if (x < Board.GetLength(0) - 2 && y >= 2 && Board[x + 1, y - 1] is not null && Board[x + 1, y - 1] != player)
             for (var i = 2; x + i < Board.GetLength(0) && y - i >= 0; i++)
             {
-                if (!Board[x + i, y - i].HasValue) break;
+                if (Board[x + i, y - i] is null) break;
                 if (Board[x + i, y - i] == player) return true;
             }
 
-        if (x >= 2 && y < Board.GetLength(0) - 2 && Board[x - 1, y + 1].HasValue && Board[x - 1, y + 1] != player)
+        if (x >= 2 && y < Board.GetLength(0) - 2 && Board[x - 1, y + 1] is not null && Board[x - 1, y + 1] != player)
             for (var i = 2; x - i >= 0 && y + i < Board.GetLength(1); i++)
             {
-                if (!Board[x - i, y + i].HasValue) break;
+                if (Board[x - i, y + i] is null) break;
                 if (Board[x - i, y + i] == player) return true;
             }
 
-        if (x < Board.GetLength(0) - 2 && y < Board.GetLength(0) - 2 && Board[x + 1, y + 1].HasValue && Board[x + 1, y + 1] != player)
+        if (x < Board.GetLength(0) - 2 && y < Board.GetLength(0) - 2 && Board[x + 1, y + 1] is not null && Board[x + 1, y + 1] != player)
             for (var i = 2; x + i < Board.GetLength(0) && y + i < Board.GetLength(1); i++)
             {
-                if (!Board[x + i, y + i].HasValue) break;
+                if (Board[x + i, y + i] is null) break;
                 if (Board[x + i, y + i] == player) return true;
             }
 
@@ -95,7 +95,7 @@ public sealed class OthelloState
 
     public OthelloState Move(int x, int y, Player player)
     {
-        if (Board[x, y].HasValue) return null;
+        if (Board[x, y] is not null) return null;
 
         var up = (int?)null;
         var down = (int?)null;
@@ -106,96 +106,96 @@ public sealed class OthelloState
         var downleft = (int?)null;
         var downright = (int?)null;
 
-        if (y >= 2 && Board[x, y - 1].HasValue && Board[x, y - 1] != player)
+        if (y >= 2 && Board[x, y - 1] is not null && Board[x, y - 1] != player)
             for (var i = 2; y - i >= 0; i++)
             {
-                if (!Board[x, y - i].HasValue) break;
+                if (Board[x, y - i] is null) break;
                 if (Board[x, y - i] == player) { up = i; break; }
             }
 
-        if (y < Board.GetLength(1) - 2 && Board[x, y + 1].HasValue && Board[x, y + 1] != player)
+        if (y < Board.GetLength(1) - 2 && Board[x, y + 1] is not null && Board[x, y + 1] != player)
             for (var i = 2; y + i < Board.GetLength(1); i++)
             {
-                if (!Board[x, y + i].HasValue) break;
+                if (Board[x, y + i] is null) break;
                 if (Board[x, y + i] == player) { down = i; break; }
             }
 
-        if (x >= 2 && Board[x - 1, y].HasValue && Board[x - 1, y] != player)
+        if (x >= 2 && Board[x - 1, y] is not null && Board[x - 1, y] != player)
             for (var i = 2; x - i >= 0; i++)
             {
-                if (!Board[x - i, y].HasValue) break;
+                if (Board[x - i, y] is null) break;
                 if (Board[x - i, y] == player) { left = i; break; }
             }
 
-        if (x < Board.GetLength(0) - 2 && Board[x + 1, y].HasValue && Board[x + 1, y] != player)
+        if (x < Board.GetLength(0) - 2 && Board[x + 1, y] is not null && Board[x + 1, y] != player)
             for (var i = 2; x + i < Board.GetLength(0); i++)
             {
-                if (!Board[x + i, y].HasValue) break;
+                if (Board[x + i, y] is null) break;
                 if (Board[x + i, y] == player) { right = i; break; }
             }
 
-        if (x >= 2 && y >= 2 && Board[x - 1, y - 1].HasValue && Board[x - 1, y - 1] != player)
+        if (x >= 2 && y >= 2 && Board[x - 1, y - 1] is not null && Board[x - 1, y - 1] != player)
             for (var i = 2; x - i >= 0 && y - i >= 0; i++)
             {
-                if (!Board[x - i, y - i].HasValue) break;
+                if (Board[x - i, y - i] is null) break;
                 if (Board[x - i, y - i] == player) { upleft = i; break; }
             }
 
-        if (x < Board.GetLength(0) - 2 && y >= 2 && Board[x + 1, y - 1].HasValue && Board[x + 1, y - 1] != player)
+        if (x < Board.GetLength(0) - 2 && y >= 2 && Board[x + 1, y - 1] is not null && Board[x + 1, y - 1] != player)
             for (var i = 2; x + i < Board.GetLength(0) && y - i >= 0; i++)
             {
-                if (!Board[x + i, y - i].HasValue) break;
+                if (Board[x + i, y - i] is null) break;
                 if (Board[x + i, y - i] == player) { upright = i; break; }
             }
 
-        if (x >= 2 && y < Board.GetLength(0) - 2 && Board[x - 1, y + 1].HasValue && Board[x - 1, y + 1] != player)
+        if (x >= 2 && y < Board.GetLength(0) - 2 && Board[x - 1, y + 1] is not null && Board[x - 1, y + 1] != player)
             for (var i = 2; x - i >= 0 && y + i < Board.GetLength(1); i++)
             {
-                if (!Board[x - i, y + i].HasValue) break;
+                if (Board[x - i, y + i] is null) break;
                 if (Board[x - i, y + i] == player) { downleft = i; break; }
             }
 
-        if (x < Board.GetLength(0) - 2 && y < Board.GetLength(0) - 2 && Board[x + 1, y + 1].HasValue && Board[x + 1, y + 1] != player)
+        if (x < Board.GetLength(0) - 2 && y < Board.GetLength(0) - 2 && Board[x + 1, y + 1] is not null && Board[x + 1, y + 1] != player)
             for (var i = 2; x + i < Board.GetLength(0) && y + i < Board.GetLength(1); i++)
             {
-                if (!Board[x + i, y + i].HasValue) break;
+                if (Board[x + i, y + i] is null) break;
                 if (Board[x + i, y + i] == player) { downright = i; break; }
             }
 
-        if (!(up.HasValue || down.HasValue || left.HasValue || right.HasValue || upleft.HasValue || upright.HasValue || downleft.HasValue || downright.HasValue)) return null;
+        if (up is null && down is null && left is null && right is null && upleft is null && upright is null && downleft is null && downright is null) return null;
 
         var newState = new OthelloState();
         Array.Copy(Board, newState.Board, Board.Length);
 
-        if (up.HasValue)
+        if (up is not null)
             for (var i = 1; i < up; i++)
                 newState.Board[x, y - i] = player;
 
-        if (down.HasValue)
+        if (down is not null)
             for (var i = 1; i < down; i++)
                 newState.Board[x, y + i] = player;
 
-        if (left.HasValue)
+        if (left is not null)
             for (var i = 1; i < left; i++)
                 newState.Board[x - i, y] = player;
 
-        if (right.HasValue)
+        if (right is not null)
             for (var i = 1; i < right; i++)
                 newState.Board[x + i, y] = player;
 
-        if (upleft.HasValue)
+        if (upleft is not null)
             for (var i = 1; i < upleft; i++)
                 newState.Board[x - i, y - i] = player;
 
-        if (upright.HasValue)
+        if (upright is not null)
             for (var i = 1; i < upright; i++)
                 newState.Board[x + i, y - i] = player;
 
-        if (downleft.HasValue)
+        if (downleft is not null)
             for (var i = 1; i < downleft; i++)
                 newState.Board[x - i, y + i] = player;
 
-        if (downright.HasValue)
+        if (downright is not null)
             for (var i = 1; i < downright; i++)
                 newState.Board[x + i, y + i] = player;
 

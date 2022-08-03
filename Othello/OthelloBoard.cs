@@ -103,7 +103,7 @@ public sealed class OthelloBoard : GraphicsControl
         using (var edgePen = new Pen(Color.Black, .05f))
             for (var x = 0; x < xcount; x++)
                 for (var y = 0; y < ycount; y++)
-                    if (othello.State.Board[x, y].HasValue)
+                    if (othello.State.Board[x, y] is not null)
                     {
                         g.DrawEllipse(edgePen, x + .1f, y + .1f, .8f, .8f);
                         g.FillEllipse(othello.State.Board[x, y].Value == Player.Black ? Brushes.Black : Brushes.White, x + .1f, y + .1f, .8f, .8f);
@@ -150,7 +150,7 @@ public sealed class OthelloBoard : GraphicsControl
                 {
                     if (othello.State.Board[x, y] == Player.Black) blackCount++;
                     else if (othello.State.Board[x, y] == Player.White) whiteCount++;
-                    if (othello.State.Board[x, y].HasValue)
+                    if (othello.State.Board[x, y] is not null)
                         using (var brush = new SolidBrush(othello.State.Board[x, y] == Player.Black
                             ? Color.FromArgb(32 + 223 / (1 + blackTotal - blackCount), Color.White)
                             : Color.FromArgb(32 + 223 / (1 + whiteTotal - whiteCount), Color.Black))
