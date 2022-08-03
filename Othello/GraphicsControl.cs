@@ -3,15 +3,10 @@ namespace Othello;
 public abstract class GraphicsControl : Control
 {
     protected SizeF ViewSize { get; set; }
-    
-    float viewScale;
-    protected float ViewScale { get { return viewScale; } }
 
-    private bool isLeftMouseDown;
-    protected bool IsLeftMouseDown { get { return isLeftMouseDown; } }
-
-    private PointF mouseView;
-    protected PointF MouseView { get { return mouseView; } }
+    protected float ViewScale { get; private set; }
+    protected bool IsLeftMouseDown { get; private set; }
+    protected PointF MouseView { get; private set; }
 
     public GraphicsControl()
     {
@@ -24,7 +19,7 @@ public abstract class GraphicsControl : Control
     {
         base.OnPaint(e);
         e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-        viewScale = ScaleGraphics(e.Graphics, ViewSize.Width, ViewSize.Height);
+        ViewScale = ScaleGraphics(e.Graphics, ViewSize.Width, ViewSize.Height);
         ViewDraw(e.Graphics);
     }
 
@@ -34,7 +29,7 @@ public abstract class GraphicsControl : Control
 
     protected override void OnMouseDown(MouseEventArgs e)
     {
-        if (e.Button == MouseButtons.Left) isLeftMouseDown = true;
+        if (e.Button == MouseButtons.Left) IsLeftMouseDown = true;
         var viewLocation = ClientToView(e.Location);
         ViewMouseDown(viewLocation.X, viewLocation.Y, e.Button);
 	        base.OnMouseDown(e);
@@ -42,14 +37,14 @@ public abstract class GraphicsControl : Control
 
     protected override void OnMouseMove(MouseEventArgs e)
     {
-        mouseView = ClientToView(e.Location);
-        ViewMouseMove(mouseView.X, mouseView.Y, e.Button);
+        MouseView = ClientToView(e.Location);
+        ViewMouseMove(MouseView.X, MouseView.Y, e.Button);
         base.OnMouseMove(e);
     }
 
     protected override void OnMouseUp(MouseEventArgs e)
     {
-        if (e.Button == MouseButtons.Left) isLeftMouseDown = false;
+        if (e.Button == MouseButtons.Left) IsLeftMouseDown = false;
         var viewLocation = ClientToView(e.Location);
         ViewMouseUp(viewLocation.X, viewLocation.Y, e.Button);
         base.OnMouseUp(e);
@@ -74,13 +69,13 @@ public abstract class GraphicsControl : Control
 
         if (ViewSize.Width * physicalHeight > physicalWidth * ViewSize.Height)
         {
-            viewScale = physicalWidth / ViewSize.Width;
-            return new PointF(client.X / viewScale, (client.Y - physicalHeight / 2f) / viewScale + ViewSize.Height / 2f);
+            ViewScale = physicalWidth / ViewSize.Width;
+            return new PointF(client.X / ViewScale, (client.Y - physicalHeight / 2f) / ViewScale + ViewSize.Height / 2f);
         }
         else
         {
-            viewScale = physicalHeight / ViewSize.Height;
-            return new PointF((client.X - physicalWidth / 2f) / viewScale + ViewSize.Width / 2f, client.Y / viewScale);
+            ViewScale = physicalHeight / ViewSize.Height;
+            return new PointF((client.X - physicalWidth / 2f) / ViewScale + ViewSize.Width / 2f, client.Y / ViewScale);
         }
     }
 
@@ -91,13 +86,13 @@ public abstract class GraphicsControl : Control
 
         if (ViewSize.Width * physicalHeight > physicalWidth * ViewSize.Height)
         {
-            viewScale = physicalWidth / ViewSize.Width;
-            return new PointF(view.X * viewScale, (view.Y - ViewSize.Height / 2f) * viewScale + physicalHeight / 2f);
+            ViewScale = physicalWidth / ViewSize.Width;
+            return new PointF(view.X * ViewScale, (view.Y - ViewSize.Height / 2f) * ViewScale + physicalHeight / 2f);
         }
         else
         {
-            viewScale = physicalHeight / ViewSize.Height;
-            return new PointF((view.Y - ViewSize.Width / 2f) * viewScale + physicalWidth / 2f, view.Y * viewScale);
+            ViewScale = physicalHeight / ViewSize.Height;
+            return new PointF((view.Y - ViewSize.Width / 2f) * ViewScale + physicalWidth / 2f, view.Y * ViewScale);
         }
     }
 
