@@ -1,4 +1,4 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 
 namespace Othello;
 
@@ -76,7 +76,7 @@ class OthelloBoard : GraphicsControl
         g.FillEllipse(Brushes.Black, 1.925f, 5.925f, .15f, .15f);
         g.FillEllipse(Brushes.Black, 5.925f, 1.925f, .15f, .15f);
         g.FillEllipse(Brushes.Black, 5.925f, 5.925f, .15f, .15f);
-        
+
         if (mouseSquare.X >= 0 && mouseSquare.X < othello.State.Board.GetLength(0) && mouseSquare.Y >= 0 && mouseSquare.Y < othello.State.Board.GetLength(1))
             using (var highlightBrush = new SolidBrush(Color.FromArgb(48, IsLeftMouseDown ? Color.Black : Color.White)))
             using (var plusPen = new Pen(

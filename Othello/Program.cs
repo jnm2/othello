@@ -1,4 +1,4 @@
-﻿namespace Othello;
+namespace Othello;
 
 static class Program
 {
