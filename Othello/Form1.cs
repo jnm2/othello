@@ -1,15 +1,14 @@
-﻿namespace Othello
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-        }
+﻿namespace Othello;
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            othelloBoard1.Othello = new OthelloGame();
-        }
+public partial class Form1 : Form
+{
+    public Form1()
+    {
+        InitializeComponent();
+    }
+
+    private void Form1_Load(object sender, EventArgs e)
+    {
+        othelloBoard1.Othello = new OthelloGame();
     }
 }
