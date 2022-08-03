@@ -6,17 +6,14 @@ public sealed class OthelloBoard : GraphicsControl
 {
     public OthelloBoard()
     {
-        BackColor = Color.FromArgb(16, 64, 32);
-        BoardColor = Color.FromArgb(24, 96, 48);
-        MaxHint = 172;
-        MinHint = 32;
+        base.BackColor = Color.FromArgb(16, 64, 32);
     }
 
     [DefaultValue(typeof(Color), "16, 64, 32")]
     public override Color BackColor { get => base.BackColor; set => base.BackColor = value; }
 
     [DefaultValue(typeof(Color), "24, 96, 48"), Category("Appearance")]
-    public Color BoardColor { get; set; }
+    public Color BoardColor { get; set; } = Color.FromArgb(24, 96, 48);
 
     private OthelloGame othello;
     public OthelloGame Othello
@@ -44,8 +41,8 @@ public sealed class OthelloBoard : GraphicsControl
         return MathF.Sqrt(r);
     }
 
-    public byte MinHint { get; set; }
-    public byte MaxHint { get; set; }
+    public byte MinHint { get; set; } = 32;
+    public byte MaxHint { get; set; } = 172;
     public bool ShowHint { get; set; }
     public bool ShowConsequence { get; set; }
 
