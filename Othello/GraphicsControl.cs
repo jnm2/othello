@@ -10,9 +10,9 @@ public abstract class GraphicsControl : Control
 
     public GraphicsControl()
     {
-        this.ResizeRedraw = true;
-        this.DoubleBuffered = true;
-        this.ViewSize = new SizeF(1.0f, 1.0f);
+        ResizeRedraw = true;
+        DoubleBuffered = true;
+        ViewSize = new SizeF(1.0f, 1.0f);
     }
 
     protected override void OnPaint(PaintEventArgs e)
@@ -64,8 +64,8 @@ public abstract class GraphicsControl : Control
 
     protected PointF ClientToView(Point client)
     {
-        var physicalWidth = this.ClientSize.Width;
-        var physicalHeight = this.ClientSize.Height;
+        var physicalWidth = ClientSize.Width;
+        var physicalHeight = ClientSize.Height;
 
         if (ViewSize.Width * physicalHeight > physicalWidth * ViewSize.Height)
         {
@@ -81,8 +81,8 @@ public abstract class GraphicsControl : Control
 
     protected PointF ViewToClient(PointF view)
     {
-        var physicalWidth = this.ClientSize.Width;
-        var physicalHeight = this.ClientSize.Height;
+        var physicalWidth = ClientSize.Width;
+        var physicalHeight = ClientSize.Height;
 
         if (ViewSize.Width * physicalHeight > physicalWidth * ViewSize.Height)
         {
@@ -100,8 +100,8 @@ public abstract class GraphicsControl : Control
     {
         float scale;
 
-        var physicalWidth = this.ClientSize.Width;
-        var physicalHeight = this.ClientSize.Height;
+        var physicalWidth = ClientSize.Width;
+        var physicalHeight = ClientSize.Height;
 
 
         if (width * physicalHeight > physicalWidth * height)

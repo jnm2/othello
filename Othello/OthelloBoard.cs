@@ -6,10 +6,10 @@ public sealed class OthelloBoard : GraphicsControl
 {
     public OthelloBoard()
     {
-        this.BackColor = Color.FromArgb(16, 64, 32);
-        this.BoardColor = Color.FromArgb(24, 96, 48);
-        this.MaxHint = 172;
-        this.MinHint = 32;
+        BackColor = Color.FromArgb(16, 64, 32);
+        BoardColor = Color.FromArgb(24, 96, 48);
+        MaxHint = 172;
+        MinHint = 32;
     }
 
     [DefaultValue(typeof(Color), "16, 64, 32")]
@@ -25,7 +25,7 @@ public sealed class OthelloBoard : GraphicsControl
         set
         {
             othello = value;
-            this.ViewSize = new SizeF(othello.State.Board.GetLength(0) + 1, othello.State.Board.GetLength(1) + 1);
+            ViewSize = new SizeF(othello.State.Board.GetLength(0) + 1, othello.State.Board.GetLength(1) + 1);
         }
     }
 
@@ -59,7 +59,7 @@ public sealed class OthelloBoard : GraphicsControl
         g.DrawImage(Properties.Resources.config, tlcorner.X + .05f, tlcorner.Y + .05f, .5f, .5f); */
         g.TranslateTransform(0.5f, 0.5f);
 
-        using (var boardBrush = new SolidBrush(this.BoardColor))
+        using (var boardBrush = new SolidBrush(BoardColor))
             g.FillRectangle(boardBrush, 0, 0, xcount, ycount);
 
         g.FillEllipse(Brushes.Black, 1.925f, 1.925f, .15f, .15f);
@@ -176,31 +176,31 @@ public sealed class OthelloBoard : GraphicsControl
     protected override void ViewMouseMove(float x, float y, MouseButtons buttons)
     {
         mouseSquare = new Point((int)Math.Floor(x - .5), (int)Math.Floor(y - .5));
-        this.Invalidate();
+        Invalidate();
     }
 
     protected override void ViewMouseDown(float x, float y, MouseButtons buttons)
     {
-        this.Invalidate();
+        Invalidate();
     }
 
     protected override void ViewMouseUp(float x, float y, MouseButtons buttons)
     {
         if (mouseSquare.X >= 0 && mouseSquare.X < othello.State.Board.GetLength(0) && mouseSquare.Y >= 0 && mouseSquare.Y < othello.State.Board.GetLength(1))
             othello.Move(mouseSquare.X, mouseSquare.Y);
-        this.Invalidate();
+        Invalidate();
     }
 
     protected override void OnKeyDown(KeyEventArgs e)
     {
         if (e.Control)
             if (e.KeyCode == Keys.Z)
-                { othello.Undo(); this.Invalidate(); }
+                { othello.Undo(); Invalidate(); }
             else if (e.KeyCode == Keys.Y)
-                { othello.Redo(); this.Invalidate(); }
+                { othello.Redo(); Invalidate(); }
             else if (e.KeyCode == Keys.H)
-                { this.ShowHint = !this.ShowHint; this.Invalidate(); }
+                { ShowHint = !ShowHint; Invalidate(); }
             else if (e.KeyCode == Keys.R)
-            { this.ShowConsequence = !this.ShowConsequence; this.Invalidate(); }
+            { ShowConsequence = !ShowConsequence; Invalidate(); }
     }
 }

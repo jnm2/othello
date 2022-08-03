@@ -201,8 +201,8 @@ public sealed class OthelloState
 
         newState.Board[x, y] = player;
 
-        newState.CurrentPlayer = this.CurrentPlayer == Player.Black ? Player.White : Player.Black;
-        if (!newState.CanMove(newState.CurrentPlayer)) newState.CurrentPlayer = this.CurrentPlayer;
+        newState.CurrentPlayer = CurrentPlayer == Player.Black ? Player.White : Player.Black;
+        if (!newState.CanMove(newState.CurrentPlayer)) newState.CurrentPlayer = CurrentPlayer;
 
         return newState;
     }
