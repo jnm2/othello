@@ -1,6 +1,6 @@
 namespace Othello;
 
-public partial class Form1 : Form
+public sealed partial class Form1 : Form
 {
     public Form1()
     {

@@ -1,6 +1,6 @@
 namespace Othello;
 
-class OthelloGame
+public sealed class OthelloGame
 {
     public OthelloGame()
     {

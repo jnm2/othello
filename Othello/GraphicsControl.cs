@@ -1,6 +1,6 @@
 namespace Othello;
 
-abstract class GraphicsControl : Control
+public abstract class GraphicsControl : Control
 {
     protected SizeF ViewSize { get; set; }
     float viewScale;

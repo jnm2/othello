@@ -1,6 +1,6 @@
-﻿namespace Othello;
+namespace Othello;
 
-public class OthelloState
+public sealed class OthelloState
 {
     private readonly Player?[,] board = new Player?[8, 8];
     public Player?[,] Board { get { return board; } }

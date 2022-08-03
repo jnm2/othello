@@ -2,7 +2,7 @@ using System.ComponentModel;
 
 namespace Othello;
 
-class OthelloBoard : GraphicsControl
+public sealed class OthelloBoard : GraphicsControl
 {
     public OthelloBoard()
     {
