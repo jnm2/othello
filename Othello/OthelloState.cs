@@ -17,7 +17,6 @@ public sealed class OthelloState
         return state;
     }
 
-
     public bool IsLegalMove(int x, int y, Player player)
     {
         if (Board[x, y].HasValue) return false;

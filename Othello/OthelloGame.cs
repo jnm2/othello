@@ -2,10 +2,14 @@ namespace Othello;
 
 public sealed class OthelloGame
 {
+    int stateIndex = 0;
+    public List<OthelloState> history = new List<OthelloState>();
+
     public OthelloGame()
     {
         history.Add(OthelloState.NewGame());
     }
+
     public OthelloGame(OthelloState state)
     {
         history.Add(state);
@@ -40,8 +44,4 @@ public sealed class OthelloGame
         stateIndex++;
         return true;
     }
-
-    int stateIndex = 0;
-    public List<OthelloState> history = new List<OthelloState>();
-
 }

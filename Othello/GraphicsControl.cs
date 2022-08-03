@@ -3,10 +3,13 @@ namespace Othello;
 public abstract class GraphicsControl : Control
 {
     protected SizeF ViewSize { get; set; }
+    
     float viewScale;
     protected float ViewScale { get { return viewScale; } }
+
     private bool isLeftMouseDown;
     protected bool IsLeftMouseDown { get { return isLeftMouseDown; } }
+
     private PointF mouseView;
     protected PointF MouseView { get { return mouseView; } }
 
@@ -24,6 +27,7 @@ public abstract class GraphicsControl : Control
         viewScale = ScaleGraphics(e.Graphics, ViewSize.Width, ViewSize.Height);
         ViewDraw(e.Graphics);
     }
+
     protected virtual void ViewDraw(Graphics g)
     {
     }
@@ -35,12 +39,14 @@ public abstract class GraphicsControl : Control
         ViewMouseDown(viewLocation.X, viewLocation.Y, e.Button);
 	        base.OnMouseDown(e);
     }
+
     protected override void OnMouseMove(MouseEventArgs e)
     {
         mouseView = ClientToView(e.Location);
         ViewMouseMove(mouseView.X, mouseView.Y, e.Button);
         base.OnMouseMove(e);
     }
+
     protected override void OnMouseUp(MouseEventArgs e)
     {
         if (e.Button == MouseButtons.Left) isLeftMouseDown = false;

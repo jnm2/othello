@@ -182,6 +182,7 @@ public sealed class OthelloBoard : GraphicsControl
     {
         return x * x;
     }
+
     private static double Sqr(double x)
     {
         return x * x;
