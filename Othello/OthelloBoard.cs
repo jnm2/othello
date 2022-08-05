@@ -26,7 +26,7 @@ public sealed class OthelloBoard : GraphicsControl
         }
     }
 
-    private Point shownMouseSquare;
+    private Point? shownMouseSquare;
 
     private static float NearestDistanceWhere(int xLen, int yLen, PointF nearTo, Func<int, int, bool> pred)
     {
@@ -61,9 +61,9 @@ public sealed class OthelloBoard : GraphicsControl
         g.FillEllipse(Brushes.Black, 5.925f, 1.925f, .15f, .15f);
         g.FillEllipse(Brushes.Black, 5.925f, 5.925f, .15f, .15f);
 
-        if (shownMouseSquare.X >= 0 && shownMouseSquare.X < othello.State.Board.GetLength(0) && shownMouseSquare.Y >= 0 && shownMouseSquare.Y < othello.State.Board.GetLength(1))
+        if (shownMouseSquare is not null)
             using (var plusPen = new Pen(
-                Color.FromArgb(othello.State.IsLegalMove(shownMouseSquare.X, shownMouseSquare.Y, othello.State.CurrentPlayer)
+                Color.FromArgb(othello.State.IsLegalMove(shownMouseSquare.Value.X, shownMouseSquare.Value.Y, othello.State.CurrentPlayer)
                     ? 255
                     : (int)(224 / (1 + Sqr(
                         NearestDistanceWhere(
@@ -79,11 +79,11 @@ public sealed class OthelloBoard : GraphicsControl
             ))
             {
                 g.DrawLines(plusPen, new PointF[] {
-                    new PointF(shownMouseSquare.X + .3f, shownMouseSquare.Y + .5f),
-                    new PointF(shownMouseSquare.X + .7f, shownMouseSquare.Y + .5f),
-                    new PointF(shownMouseSquare.X + .5f, shownMouseSquare.Y + .5f),
-                    new PointF(shownMouseSquare.X + .5f, shownMouseSquare.Y + .3f),
-                    new PointF(shownMouseSquare.X + .5f, shownMouseSquare.Y + .7f)
+                    new PointF(shownMouseSquare.Value.X + .3f, shownMouseSquare.Value.Y + .5f),
+                    new PointF(shownMouseSquare.Value.X + .7f, shownMouseSquare.Value.Y + .5f),
+                    new PointF(shownMouseSquare.Value.X + .5f, shownMouseSquare.Value.Y + .5f),
+                    new PointF(shownMouseSquare.Value.X + .5f, shownMouseSquare.Value.Y + .3f),
+                    new PointF(shownMouseSquare.Value.X + .5f, shownMouseSquare.Value.Y + .7f)
                 });
             }
 
@@ -116,13 +116,13 @@ public sealed class OthelloBoard : GraphicsControl
                         }
                     }
 
-        if (ShowConsequence && shownMouseSquare.X >= 0 && shownMouseSquare.X < othello.State.Board.GetLength(0) && shownMouseSquare.Y >= 0 && shownMouseSquare.Y < othello.State.Board.GetLength(1))
+        if (ShowConsequence && shownMouseSquare is not null)
         {
-            var move = othello.State.Move(shownMouseSquare.X, shownMouseSquare.Y, othello.State.CurrentPlayer);
+            var move = othello.State.Move(shownMouseSquare.Value.X, shownMouseSquare.Value.Y, othello.State.CurrentPlayer);
             if (move != null)
                 for (var x = 0; x < othello.State.Board.GetLength(0); x++)
                     for (var y = 0; y < othello.State.Board.GetLength(1); y++)
-                        if (!(x == shownMouseSquare.X && y == shownMouseSquare.Y) && move.Board[x, y] != othello.State.Board[x, y])
+                        if (!(x == shownMouseSquare.Value.X && y == shownMouseSquare.Value.Y) && move.Board[x, y] != othello.State.Board[x, y])
                             g.FillEllipse(Brushes.Red, x + .45f, y + .45f, .1f, .1f);
         }
 
@@ -167,21 +167,30 @@ public sealed class OthelloBoard : GraphicsControl
 
     protected override void ViewMouseMove(float x, float y, MouseButtons buttons)
     {
-        var newMouseSquare = new Point((int)Math.Floor(x - .5), (int)Math.Floor(y - .5));
-        if (shownMouseSquare != newMouseSquare)
+        var mouseOverSquare = GetSquareAt(x, y);
+        if (shownMouseSquare != mouseOverSquare)
         {
-            shownMouseSquare = newMouseSquare;
+            shownMouseSquare = mouseOverSquare;
             Invalidate();
         }
     }
 
     protected override void ViewMouseUp(float x, float y, MouseButtons buttons)
     {
-        if (shownMouseSquare.X >= 0 && shownMouseSquare.X < othello.State.Board.GetLength(0) && shownMouseSquare.Y >= 0 && shownMouseSquare.Y < othello.State.Board.GetLength(1))
+        if (shownMouseSquare is not null)
         {
-            othello.Move(shownMouseSquare.X, shownMouseSquare.Y);
+            othello.Move(shownMouseSquare.Value.X, shownMouseSquare.Value.Y);
             Invalidate();
         }
+    }
+
+    private Point? GetSquareAt(float x, float y)
+    {
+        var square = new Point((int)Math.Floor(x - .5), (int)Math.Floor(y - .5));
+
+        return square.X >= 0 && square.X < othello.State.Board.GetLength(0) && square.Y >= 0 && square.Y < othello.State.Board.GetLength(1)
+            ? square
+            : null;
     }
 
     protected override bool ProcessDialogKey(Keys keyData)
