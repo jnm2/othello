@@ -51,9 +51,6 @@ public sealed class OthelloBoard : GraphicsControl
         var xcount = othello.State.Board.GetLength(0);
         var ycount = othello.State.Board.GetLength(1);
 
-        /*var tlcorner = ClientToView(new Point(0, 0));
-        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-        g.DrawImage(Properties.Resources.config, tlcorner.X + .05f, tlcorner.Y + .05f, .5f, .5f); */
         g.TranslateTransform(0.5f, 0.5f);
 
         using (var boardBrush = new SolidBrush(BoardColor))
