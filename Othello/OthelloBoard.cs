@@ -186,7 +186,7 @@ public sealed class OthelloBoard : GraphicsControl
 
     private Point? GetSquareAt(float x, float y)
     {
-        var square = new Point((int)Math.Floor(x - .5), (int)Math.Floor(y - .5));
+        var square = new Point((int)MathF.Floor(x - .5f), (int)MathF.Floor(y - .5f));
 
         return square.X >= 0 && square.X < othello.State.Board.GetLength(0) && square.Y >= 0 && square.Y < othello.State.Board.GetLength(1)
             ? square
