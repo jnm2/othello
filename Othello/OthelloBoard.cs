@@ -62,7 +62,6 @@ public sealed class OthelloBoard : GraphicsControl
         g.FillEllipse(Brushes.Black, 5.925f, 5.925f, .15f, .15f);
 
         if (mouseSquare.X >= 0 && mouseSquare.X < othello.State.Board.GetLength(0) && mouseSquare.Y >= 0 && mouseSquare.Y < othello.State.Board.GetLength(1))
-            using (var highlightBrush = new SolidBrush(Color.FromArgb(48, IsLeftMouseDown ? Color.Black : Color.White)))
             using (var plusPen = new Pen(
                 Color.FromArgb(othello.State.IsLegalMove(mouseSquare.X, mouseSquare.Y, othello.State.CurrentPlayer)
                     ? 255
@@ -79,7 +78,6 @@ public sealed class OthelloBoard : GraphicsControl
                 .05f
             ))
             {
-                //g.FillRectangle(highlightBrush, mouseSquare.X, mouseSquare.Y, 1.0f, 1.0f);
                 g.DrawLines(plusPen, new PointF[] {
                     new PointF(mouseSquare.X + .3f, mouseSquare.Y + .5f),
                     new PointF(mouseSquare.X + .7f, mouseSquare.Y + .5f),
