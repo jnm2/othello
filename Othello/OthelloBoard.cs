@@ -167,17 +167,20 @@ public sealed class OthelloBoard : GraphicsControl
 
     protected override void ViewMouseMove(float x, float y, MouseButtons buttons)
     {
-        var mouseOverSquare = GetSquareAt(x, y);
-        if (shownMouseSquare != mouseOverSquare)
+        if (buttons == MouseButtons.None)
         {
-            shownMouseSquare = mouseOverSquare;
-            Invalidate();
+            var mouseOverSquare = GetSquareAt(x, y);
+            if (shownMouseSquare != mouseOverSquare)
+            {
+                shownMouseSquare = mouseOverSquare;
+                Invalidate();
+            }
         }
     }
 
     protected override void ViewMouseUp(float x, float y, MouseButtons buttons)
     {
-        if (shownMouseSquare is not null)
+        if (shownMouseSquare is not null && GetSquareAt(x, y) == shownMouseSquare)
         {
             othello.Move(shownMouseSquare.Value.X, shownMouseSquare.Value.Y);
             Invalidate();
